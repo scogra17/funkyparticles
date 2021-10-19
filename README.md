@@ -1,3 +1,3 @@
 # About
-A simple Node service for observing motion
+For observing custom funky motion
 
