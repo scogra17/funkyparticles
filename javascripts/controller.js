@@ -23,7 +23,6 @@ class Controller {
   handleSelectParticleMotion = (motion) => {
     this.particles.movement = motion;
     this.canvas.cancelAnimation();
-    this.particles.resetCoordinates();
     this.canvas.animate(this.particles);
   }
 
