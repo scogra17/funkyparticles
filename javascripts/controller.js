@@ -1,18 +1,18 @@
-const PARTICLE_COUNT = 1;
-
+/* eslint-disable no-undef */
+// eslint-disable-next-line no-unused-vars
 class Controller {
-  constructor(view, canvas, particles) {
+  constructor(view) {
     this.view = view;
-    this.canvas = canvas;
-    this.particles =  particles;
-
-    this.createInitialParticles();
+    this.canvas = new Canvas(
+      window.innerHeight,
+      window.innerWidth
+    );
+    this.particles =  new Particles(
+      this.canvas.width / 2,
+      this.canvas.height / 2,
+    );
     this.canvas.animate(this.particles);
     this.bindEvents();
-  }
-
-  createInitialParticles() {
-    this.particles.addParticles(PARTICLE_COUNT);
   }
 
   bindEvents() {
@@ -20,6 +20,7 @@ class Controller {
     this.view.bindPauseCanvas(this.handlePauseCanvas);
     this.view.bindAddParticle(this.handleAddParticle);
     this.view.bindRestartCanvas(this.handleRestartCanvas);
+    this.view.bindResizeWindow(this.handleResizeWindow);
   }
 
   handleSelectParticleMotion = (motion) => {
@@ -46,5 +47,10 @@ class Controller {
     this.particles.resetCoordinates();
     this.canvas.animate(this.particles);
     this.view.togglePlayPause(this.canvas.paused);
+  }
+
+  handleResizeWindow = (height, width) => {
+    this.canvas.height = height;
+    this.canvas.width = width;
   }
 }

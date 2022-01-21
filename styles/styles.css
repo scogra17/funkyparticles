@@ -1,5 +1,14 @@
+h1 {
+  display: inline-block;
+}
+
+#dropdown {
+  position: absolute;
+}
+
 canvas {
   border: 1px solid rgba(180, 191, 196, 0.585);
+  position: absolute;
 }
 
 .btn {
@@ -12,4 +21,9 @@ canvas {
 
 #particle-count-form {
   display: inline-block;
+}
+
+#control-bar {
+  z-index: 1;
+  position: absolute;
 }

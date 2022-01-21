@@ -1,20 +1,23 @@
+/* eslint-disable no-undef */
+// eslint-disable-next-line no-unused-vars
 class Particles {
-  constructor() {
+  constructor(initialX = 0, initialY = 0) {
+    this._initialX = initialX;
+    this._initialY = initialY;
     this._particles = [];
     this._movement = 'random';
     this._movementInfo = {
       swarm: 'https://en.wikipedia.org/wiki/Swarm_behaviour',
       random: 'https://en.wikipedia.org/wiki/Random_walk',
     };
+    this.addParticle();
   }
 
-  set movement(name) {
-    this._movement = name;
-  }
+  set movement(name) { this._movement = name}
+  get movement() { return this._movement }
+  get particles() { return this._particles }
 
-  get particles() {
-    return this._particles;
-  }
+  getParticle(idx) { return this._particles[idx] }
 
   count() {
     return this._particles.length;
@@ -41,11 +44,11 @@ class Particles {
   }
 
   addParticle() {
-    this._particles.push(new Particle());
+    this._particles.push(new Particle(this._initialX, this._initialY));
   }
 
-  addParticles(n) {
-    for (let i = 0; i < n; i += 1) {
+  addParticles(count) {
+    for (let particle = 0; particle < count; particle += 1) {
       this.addParticle();
     }
   }
@@ -76,7 +79,7 @@ class Particles {
   }
 
   swarmStep() {
-    this._particles.forEach((particle) => {
+    this._particles.forEach(() => {
       this.assignNeighbors();
       this._particles.forEach((particle) => {
         particle.moveTowardsNearestNeighbor();

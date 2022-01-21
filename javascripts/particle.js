@@ -1,11 +1,19 @@
+// eslint-disable-next-line no-unused-vars
 class Particle {
-  constructor() {
+  constructor(initialX = 0, initialY = 0) {
+    this._x = initialX;
+    this._y = initialY;
     this.img = new Image();
     this.img.src = window.createCircleSVGSrc(window.randomColor());
-    this.x = 150;
-    this.y = 150;
+    this._diameter = 20;
     this._nearestNeighbor = undefined;
   }
+
+  get x() { return this._x }
+  set x(val) { this._x += val }
+  get y() { return this._y }
+  set y(val) { this._y += val }
+  get diameter() { return this._diameter }
 
   moveTowardsNearestNeighbor(dampeningFactor = 0.25) {
     if (this._nearestNeighbor &&
@@ -22,24 +30,24 @@ class Particle {
   }
 
   distanceTo(other) {
-    return Math.sqrt(((this.x - other.x) ** 2) + ((this.y - other.y) ** 2));
+    return Math.sqrt(((this._x - other.x) ** 2) + ((this._y - other.y) ** 2));
   }
 
   randomStep(stepSize = 5) {
     let xStep = [-stepSize,stepSize][this.getRandomInt(2)];
     let yStep = [-stepSize,stepSize][this.getRandomInt(2)];
-    this.x += xStep;
-    this.y += yStep;
+    this._x += xStep;
+    this._y += yStep;
   }
 
   directedStep(x, y) {
-    this.x += x;
-    this.y += y;
+    this._x += x;
+    this._y += y;
   }
 
   resetCoorindates() {
-    this.x = 150;
-    this.y = 150;
+    this._x = 150;
+    this._y = 150;
   }
 
   getRandomInt(max) {
@@ -47,6 +55,6 @@ class Particle {
   }
 
   coordinates() {
-    return { x: this.x, y: this.y };
+    return { x: this._x, y: this._y };
   }
 }

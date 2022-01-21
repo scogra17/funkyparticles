@@ -1,7 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 class View {
   constructor() {
     this.main = document.querySelector('main');
-    this.header = document.querySelector('header');
     this.createContainerElements();
     this.fillContainerElements();
     this.displayHomeElements();
@@ -9,9 +9,14 @@ class View {
 
   createContainerElements() {
     this.title = this.createElement({tag: 'h1', textContent: 'funky particles'});
-    this.canvas = this.createElement({tag: 'canvas', attributes: {width: '500px', height: '400px'}});
-    this.dropdown = this.createElement({tag: 'select'});
-    this.controlBar = this.createElement({tag: 'ul'});
+    this.canvas = this.createElement(
+      {tag: 'canvas', attributes: {
+        width: window.screen.availWidth,
+        height: window.screen.availHeight,
+      }
+      });
+    this.dropdown = this.createElement({tag: 'select', id: 'dropdown'});
+    this.controlBar = this.createElement({tag: 'ul', id: 'control-bar'});
     this.displayPanel = this.createElement({tag: 'div', id: 'display-panel'});
   }
 
@@ -43,13 +48,16 @@ class View {
     this.playPauseBtn = this.createElement({tag: 'a', classes: ['btn'], textContent: 'pause', attributes: {href:'#'}});
     this.addParticleBtn = this.createElement({tag: 'a', classes: ['btn'], textContent: 'add particle', attributes: {href:'#'}});
     this.controlBar.append(
+      this.title,
       this.restartBtn,
       this.playPauseBtn,
-      this.addParticleBtn
+      this.addParticleBtn,
+      this.dropdown,
     );
   }
 
   fillDisplayPanel() {
+    this.canvas.append();
     this.displayPanel.append(this.canvas, this.controlBar);
   }
 
@@ -64,7 +72,6 @@ class View {
   displayHomeElements = function() {
     this.clearElementChildren(this.main);
     this.main.append(this.displayPanel);
-    this.header.append(this.title, this.dropdown);
   }
 
   // handlers
@@ -96,6 +103,13 @@ class View {
     });
   }
 
+  bindResizeWindow(handler) {
+    this.window.addEventListener('resize', (event) => {
+      event.preventDefault();
+      handler(window.screen.availHeight, window.screen.availWidth);
+    });
+  }
+
   // utility functions
 
   clearElementChildren(element) {
@@ -106,7 +120,9 @@ class View {
 
   createElement(elem) {
     const element = document.createElement(elem.tag);
-    if (elem.classes) elem.classes.forEach((c) => element.classList.add(c));
+    if (elem.classes) elem.classes.forEach((clss) => {
+      element.classList.add(clss);
+    });
     if (elem.id) element.id = elem.id;
     if (elem.attributes) {
       Object.keys(elem.attributes).forEach((a) => {
