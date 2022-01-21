@@ -1,3 +1,35 @@
 canvas {
   border: 1px solid rgba(180, 191, 196, 0.585);
 }
+
+iframe {
+  width: 100%;
+  border: none;
+  height: 100vh;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+#display-panel {
+  grid-column: 1 / 1;
+}
+
+#info-panel {
+  grid-column: 2 / 2;
+}
+
+.btn {
+  margin: 10px;
+  text-decoration: none;
+  padding: 10px;
+  background-color: rgb(147, 147, 189);
+  color: white;
+}
+
+#particle-count-form {
+  display: inline-block;
+}

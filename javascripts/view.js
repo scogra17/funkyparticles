@@ -8,12 +8,12 @@ class View {
   }
 
   createContainerElements() {
-    this.title = this.createElement({tag: 'h1', textContent: 'Particles'});
+    this.title = this.createElement({tag: 'h1', textContent: 'funky particles'});
     this.canvas = this.createElement({tag: 'canvas', attributes: {width: '500px', height: '400px'}});
     this.dropdown = this.createElement({tag: 'select'});
     this.controlBar = this.createElement({tag: 'ul'});
-    this.displayPanel = this.createElement({tag: 'div'});
-    this.infoPanel = this.createElement({tag: 'div'});
+    this.displayPanel = this.createElement({tag: 'div', id: 'display-panel'});
+    this.infoPanel = this.createElement({tag: 'div', id: 'info-panel'});
   }
 
   fillContainerElements() {
@@ -23,7 +23,7 @@ class View {
     this.fillDisplayPanel();
   }
 
-  fillDropdown(options=['random', 'swarm']) {
+  fillDropdown(options = ['random', 'swarm']) {
     this.dropdownPlaceholder = this.createElement({
       tag: 'option',
       textContent: 'Select behavior',
@@ -41,17 +41,35 @@ class View {
   }
 
   fillControlBar() {
-    this.restartBtn = this.createElement({tag: 'a', textContent: 'restart', attributes: {href:'#'}});
-    this.controlBar.append(this.restartBtn);
+    this.restartBtn = this.createElement({tag: 'a', classes: ['btn'], textContent: 'restart', attributes: {href:'#'}});
+    this.playPauseBtn = this.createElement({tag: 'a', classes: ['btn'], textContent: 'pause', attributes: {href:'#'}});
+    this.addParticleBtn = this.createElement({tag: 'a', classes: ['btn'], textContent: 'add particle', attributes: {href:'#'}});
+    this.controlBar.append(
+      this.restartBtn,
+      this.playPauseBtn,
+      this.addParticleBtn
+    );
   }
 
   fillInfoPanel() {
-    this.infoPanelTitle = this.createElement({tag: 'h2', textContent: 'Info'});
-    this.infoPanel.append(this.infoPanelTitle);
+    this.infoPanelContent = this.createElement({tag: 'iframe'});
+    this.infoPanel.append(this.infoPanelContent);
+  }
+
+  fillInfoPanelContent(url) {
+    this.infoPanelContent.src = url;
   }
 
   fillDisplayPanel() {
     this.displayPanel.append(this.canvas, this.controlBar);
+  }
+
+  togglePlayPause(paused) {
+    if (paused) {
+      this.playPauseBtn.textContent = 'play';
+    } else {
+      this.playPauseBtn.textContent = 'pause';
+    }
   }
 
   displayHomeElements = function() {
@@ -62,17 +80,31 @@ class View {
 
   // handlers
   bindSelectParticleMotion(handler) {
-    this.dropdown.addEventListener('change', (e) => {
-      e.preventDefault();
-      handler(e.target.value);
-    })
+    this.dropdown.addEventListener('change', (event) => {
+      event.preventDefault();
+      handler(event.target.value);
+    });
+  }
+
+  bindPauseCanvas(handler) {
+    this.playPauseBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      handler();
+    });
+  }
+
+  bindAddParticle(handler) {
+    this.addParticleBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      handler();
+    });
   }
 
   bindRestartCanvas(handler) {
-    this.restartBtn.addEventListener('click', (e) => {
-      e.preventDefault();
+    this.restartBtn.addEventListener('click', (event) => {
+      event.preventDefault();
       handler();
-    })
+    });
   }
 
   // utility functions
