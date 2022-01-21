@@ -25,7 +25,6 @@ class Controller {
   handleSelectParticleMotion = (motion) => {
     this.particles.movement = motion;
     this.canvas.cancelAnimation();
-    this.view.fillInfoPanelContent(this.particles._movementInfo[motion]);
     this.canvas.animate(this.particles);
   }
 

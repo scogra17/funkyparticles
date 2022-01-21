@@ -13,13 +13,11 @@ class View {
     this.dropdown = this.createElement({tag: 'select'});
     this.controlBar = this.createElement({tag: 'ul'});
     this.displayPanel = this.createElement({tag: 'div', id: 'display-panel'});
-    this.infoPanel = this.createElement({tag: 'div', id: 'info-panel'});
   }
 
   fillContainerElements() {
     this.fillDropdown();
     this.fillControlBar();
-    this.fillInfoPanel();
     this.fillDisplayPanel();
   }
 
@@ -51,15 +49,6 @@ class View {
     );
   }
 
-  fillInfoPanel() {
-    this.infoPanelContent = this.createElement({tag: 'iframe'});
-    this.infoPanel.append(this.infoPanelContent);
-  }
-
-  fillInfoPanelContent(url) {
-    this.infoPanelContent.src = url;
-  }
-
   fillDisplayPanel() {
     this.displayPanel.append(this.canvas, this.controlBar);
   }
@@ -74,7 +63,7 @@ class View {
 
   displayHomeElements = function() {
     this.clearElementChildren(this.main);
-    this.main.append(this.displayPanel, this.infoPanel);
+    this.main.append(this.displayPanel);
     this.header.append(this.title, this.dropdown);
   }
 
