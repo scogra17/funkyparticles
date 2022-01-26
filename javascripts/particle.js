@@ -45,9 +45,9 @@ class Particle {
     this._y += y;
   }
 
-  resetCoorindates() {
-    this._x = 150;
-    this._y = 150;
+  resetCoorindates(width = 150, height = 150) {
+    this._x = width;
+    this._y = height;
   }
 
   getRandomInt(max) {

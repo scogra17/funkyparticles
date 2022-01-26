@@ -1,13 +1,11 @@
+@import 'whitespace-reset.css';
+
 h1 {
   display: inline-block;
-}
-
-#dropdown {
-  position: absolute;
+  font-size: 2em;
 }
 
 canvas {
-  border: 1px solid rgba(180, 191, 196, 0.585);
   position: absolute;
 }
 
@@ -15,15 +13,73 @@ canvas {
   margin: 10px;
   text-decoration: none;
   padding: 10px;
-  background-color: rgb(147, 147, 189);
-  color: white;
+  background-color: rgba(134, 134, 190, 0.726);
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  display: grid;
+  align-content: center;
+  text-align: center;
+  height: 30px;
+  width: 60px;
+}
+
+.btn:hover {
+  background-color: rgba(111, 111, 187, 0.726);
 }
 
 #particle-count-form {
   display: inline-block;
 }
 
+#header {
+  margin: 20px 0px 0px 20px;
+  height: 60px;
+  display: grid;
+  grid-template-columns: 210px;
+  grid-template-rows: 60px 1fr;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+#title {
+  grid-row: 1;
+  margin: auto;
+}
+
 #control-bar {
+  grid-row: 2;
   z-index: 1;
-  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 10px;
+  height: 60px;
+}
+
+#dropdown {
+  height: 20px;
+  margin-top: auto;
+  width: 120px;
+  margin: 10px;
+}
+
+@media screen and (min-width: 710px) {
+  #header {
+    grid-template-columns: 210px 500px 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  #title {
+    grid-column: 1;
+  }
+
+  #control-bar {
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-columns: repeat(4, 100px);
+    align-content: center;
+  }
+
+  #dropdown {
+    margin: auto;
+  }
 }

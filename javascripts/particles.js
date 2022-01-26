@@ -59,7 +59,7 @@ class Particles {
 
   resetCoordinates() {
     this.particles.forEach((particle) => {
-      particle.resetCoorindates();
+      particle.resetCoorindates(this._particleOriginX, this._particleOriginY);
     });
   }
 

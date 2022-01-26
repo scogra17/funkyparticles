@@ -8,7 +8,7 @@ class View {
   }
 
   createContainerElements() {
-    this.title = this.createElement({tag: 'h1', textContent: 'funky particles'});
+    this.title = this.createElement({tag: 'h1', id: 'title', textContent: 'funky particles'});
     this.canvas = this.createElement(
       {tag: 'canvas', attributes: {
         width: window.innerWidth,
@@ -17,12 +17,14 @@ class View {
       });
     this.dropdown = this.createElement({tag: 'select', id: 'dropdown'});
     this.controlBar = this.createElement({tag: 'ul', id: 'control-bar'});
+    this.header = this.createElement({tag: 'header', id: 'header'});
     this.displayPanel = this.createElement({tag: 'div', id: 'display-panel'});
   }
 
   fillContainerElements() {
     this.fillDropdown();
     this.fillControlBar();
+    this.fillHeader();
     this.fillDisplayPanel();
   }
 
@@ -44,11 +46,10 @@ class View {
   }
 
   fillControlBar() {
-    this.restartBtn = this.createElement({tag: 'a', classes: ['btn'], textContent: 'restart', attributes: {href:'#'}});
-    this.playPauseBtn = this.createElement({tag: 'a', classes: ['btn'], textContent: 'pause', attributes: {href:'#'}});
-    this.addParticleBtn = this.createElement({tag: 'a', classes: ['btn'], textContent: 'add particle', attributes: {href:'#'}});
+    this.restartBtn = this.createElement({tag: 'a', id: 'restart', classes: ['btn'], textContent: 'restart', attributes: {href:'#'}});
+    this.playPauseBtn = this.createElement({tag: 'a', id: 'play-pause', classes: ['btn'], textContent: 'pause', attributes: {href:'#'}});
+    this.addParticleBtn = this.createElement({tag: 'a', id: 'add', classes: ['btn'], textContent: 'add particle', attributes: {href:'#'}});
     this.controlBar.append(
-      this.title,
       this.restartBtn,
       this.playPauseBtn,
       this.addParticleBtn,
@@ -56,8 +57,12 @@ class View {
     );
   }
 
+  fillHeader() {
+    this.header.append(this.title, this.controlBar);
+  }
+
   fillDisplayPanel() {
-    this.displayPanel.append(this.canvas, this.controlBar);
+    this.displayPanel.append(this.canvas, this.header);
   }
 
   resizeCanvas(width, height) {
