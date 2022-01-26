@@ -28,7 +28,7 @@ class View {
     this.fillDisplayPanel();
   }
 
-  fillDropdown(options = ['random', 'swarm']) {
+  fillDropdown(options = ['random', 'towards neighbor']) {
     let elem;
     options.forEach((opt) => {
       elem = this.createElement(

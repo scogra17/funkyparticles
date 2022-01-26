@@ -7,8 +7,8 @@ class Particles {
     this._particles = [];
     this._movement = 'random';
     this._movementInfo = {
-      swarm: 'https://en.wikipedia.org/wiki/Swarm_behaviour',
-      random: 'https://en.wikipedia.org/wiki/Random_walk',
+      'towards neighbor': 'https://en.wikipedia.org/wiki/Swarm_behaviour',
+      "random": 'https://en.wikipedia.org/wiki/Random_walk',
     };
     this.addParticle();
   }
@@ -68,8 +68,8 @@ class Particles {
       case 'random':
         this.randomWalkStep();
         break;
-      case 'swarm':
-        this.swarmStep();
+      case 'towards neighbor':
+        this.towardsNeighborStep();
         break;
       default:
         this.randomWalkStep();
@@ -82,7 +82,7 @@ class Particles {
     });
   }
 
-  swarmStep() {
+  towardsNeighborStep() {
     this._particles.forEach(() => {
       this.assignNeighbors();
       this._particles.forEach((particle) => {
