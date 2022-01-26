@@ -24,7 +24,7 @@ class Canvas {
       this.play();
       let ctx = document.querySelector('canvas').getContext('2d');
       ctx.save();
-      ctx.clearRect(0, 0, this._height, this._width);
+      ctx.clearRect(0, 0, this._width, this._height);
 
       // draw each particle
       for (let idx = 0; idx < particles.count(); idx += 1) {
