@@ -29,13 +29,6 @@ class View {
   }
 
   fillDropdown(options = ['random', 'swarm']) {
-    this.dropdownPlaceholder = this.createElement({
-      tag: 'option',
-      textContent: 'Select behavior',
-      attributes: { value: '', selected: null },
-    });
-    this.dropdown.appendChild(this.dropdownPlaceholder);
-
     let elem;
     options.forEach((opt) => {
       elem = this.createElement(
@@ -50,9 +43,9 @@ class View {
     this.playPauseBtn = this.createElement({tag: 'a', id: 'play-pause', classes: ['btn'], textContent: 'pause', attributes: {href:'#'}});
     this.addParticleBtn = this.createElement({tag: 'a', id: 'add', classes: ['btn'], textContent: 'add particle', attributes: {href:'#'}});
     this.controlBar.append(
-      this.restartBtn,
       this.playPauseBtn,
       this.addParticleBtn,
+      this.restartBtn,
       this.dropdown,
     );
   }
@@ -70,7 +63,7 @@ class View {
     this.canvas.setAttribute('height', height);
   }
 
-  togglePlayPause(paused) {
+  displayPlayPause(paused) {
     if (paused) {
       this.playPauseBtn.textContent = 'play';
     } else {
@@ -91,7 +84,7 @@ class View {
     });
   }
 
-  bindPauseCanvas(handler) {
+  bindPlayPauseCanvas(handler) {
     this.playPauseBtn.addEventListener('click', (event) => {
       event.preventDefault();
       handler();

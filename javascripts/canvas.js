@@ -20,8 +20,8 @@ class Canvas {
 
   // eslint-disable-next-line max-statements
   animate(particles) {
+    this.play();
     if (this._repaints % this._repaintsPerUpdate === 0) { // update only once every 10 re-paints
-      this.play();
       let ctx = document.querySelector('canvas').getContext('2d');
       ctx.save();
       ctx.clearRect(0, 0, this._width, this._height);

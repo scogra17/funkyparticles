@@ -17,7 +17,7 @@ class Controller {
 
   bindEvents() {
     this.view.bindSelectParticleMotion(this.handleSelectParticleMotion);
-    this.view.bindPauseCanvas(this.handlePauseCanvas);
+    this.view.bindPlayPauseCanvas(this.handlePlayPauseCanvas);
     this.view.bindAddParticle(this.handleAddParticle);
     this.view.bindRestartCanvas(this.handleRestartCanvas);
     this.view.bindResizeWindow(this.debounce(this.handleResizeWindow));
@@ -29,13 +29,13 @@ class Controller {
     this.canvas.animate(this.particles);
   }
 
-  handlePauseCanvas = () => {
+  handlePlayPauseCanvas = () => {
     if (this.canvas.paused) {
       this.canvas.animate(this.particles);
     } else {
       this.canvas.cancelAnimation();
     }
-    this.view.togglePlayPause(this.canvas.paused);
+    this.view.displayPlayPause(this.canvas.paused);
   }
 
   handleAddParticle = () => {
@@ -46,7 +46,7 @@ class Controller {
     this.canvas.cancelAnimation();
     this.particles.resetCoordinates();
     this.canvas.animate(this.particles);
-    this.view.togglePlayPause(this.canvas.paused);
+    this.view.displayPlayPause(this.canvas.paused);
   }
 
   handleResizeWindow = (width, height) => {
