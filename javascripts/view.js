@@ -11,8 +11,8 @@ class View {
     this.title = this.createElement({tag: 'h1', textContent: 'funky particles'});
     this.canvas = this.createElement(
       {tag: 'canvas', attributes: {
-        width: window.screen.availWidth,
-        height: window.screen.availHeight,
+        width: window.innerWidth,
+        height: window.innerHeight,
       }
       });
     this.dropdown = this.createElement({tag: 'select', id: 'dropdown'});
@@ -57,8 +57,12 @@ class View {
   }
 
   fillDisplayPanel() {
-    this.canvas.append();
     this.displayPanel.append(this.canvas, this.controlBar);
+  }
+
+  resizeCanvas(width, height) {
+    this.canvas.setAttribute('width', width);
+    this.canvas.setAttribute('height', height);
   }
 
   togglePlayPause(paused) {
@@ -104,9 +108,9 @@ class View {
   }
 
   bindResizeWindow(handler) {
-    this.window.addEventListener('resize', (event) => {
+    window.addEventListener('resize', (event) => {
       event.preventDefault();
-      handler(window.screen.availHeight, window.screen.availWidth);
+      handler(window.innerWidth, window.innerHeight);
     });
   }
 

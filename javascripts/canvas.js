@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 class Canvas {
-  constructor(height, width) {
-    this._height = height;
+  constructor(width, height) {
     this._width = width;
+    this._height = height;
     this._paused = false;
     this._animationRequestID = undefined;
     this._repaints = 0;
@@ -18,6 +18,7 @@ class Canvas {
   pause() { this._paused = true }
   play() { this._paused = false }
 
+  // eslint-disable-next-line max-statements
   animate(particles) {
     if (this._repaints % this._repaintsPerUpdate === 0) { // update only once every 10 re-paints
       this.play();
@@ -34,6 +35,8 @@ class Canvas {
         ctx.restore();
       }
 
+      particles.particleOriginX = this._width;
+      particles.particleOriginY = this._height;
       particles.updateParticleLocations();
       ctx.restore();
     }

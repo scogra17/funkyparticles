@@ -2,8 +2,8 @@
 // eslint-disable-next-line no-unused-vars
 class Particles {
   constructor(initialX = 0, initialY = 0) {
-    this._initialX = initialX;
-    this._initialY = initialY;
+    this._particleOriginX = initialX;
+    this._particleOriginY = initialY;
     this._particles = [];
     this._movement = 'random';
     this._movementInfo = {
@@ -13,6 +13,10 @@ class Particles {
     this.addParticle();
   }
 
+  set particleOriginX(val) { this._particleOriginX = val / 2 }
+  get particleOriginX() { return this._particleOriginX }
+  set particleOriginY(val) { this._particleOriginY = val / 2 }
+  get particleOriginY() { return this._particleOriginY }
   set movement(name) { this._movement = name}
   get movement() { return this._movement }
   get particles() { return this._particles }
@@ -43,8 +47,8 @@ class Particles {
     }
   }
 
-  addParticle() {
-    this._particles.push(new Particle(this._initialX, this._initialY));
+  addParticle(width = this._particleOriginX, height = this._particleOriginY) {
+    this._particles.push(new Particle(width, height));
   }
 
   addParticles(count) {

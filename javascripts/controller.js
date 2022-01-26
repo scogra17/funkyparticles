@@ -4,8 +4,8 @@ class Controller {
   constructor(view) {
     this.view = view;
     this.canvas = new Canvas(
+      window.innerWidth,
       window.innerHeight,
-      window.innerWidth
     );
     this.particles =  new Particles(
       this.canvas.width / 2,
@@ -20,7 +20,7 @@ class Controller {
     this.view.bindPauseCanvas(this.handlePauseCanvas);
     this.view.bindAddParticle(this.handleAddParticle);
     this.view.bindRestartCanvas(this.handleRestartCanvas);
-    this.view.bindResizeWindow(this.handleResizeWindow);
+    this.view.bindResizeWindow(this.debounce(this.handleResizeWindow));
   }
 
   handleSelectParticleMotion = (motion) => {
@@ -49,8 +49,17 @@ class Controller {
     this.view.togglePlayPause(this.canvas.paused);
   }
 
-  handleResizeWindow = (height, width) => {
-    this.canvas.height = height;
+  handleResizeWindow = (width, height) => {
     this.canvas.width = width;
+    this.canvas.height = height;
+    this.view.resizeCanvas(width, height);
+  }
+
+  debounce(func, timeout = 1000) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args) }, timeout);
+    };
   }
 }
